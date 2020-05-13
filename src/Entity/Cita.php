@@ -42,6 +42,16 @@ class Cita
      */
     private $estado;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Hospital::class, inversedBy="citas")
+     */
+    private $hospital;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Usuarios::class, cascade={"persist", "remove"})
+     */
+    private $usuario;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +113,30 @@ class Cita
     public function setEstado(?bool $estado): self
     {
         $this->estado = $estado;
+
+        return $this;
+    }
+
+    public function getHospital(): ?Hospital
+    {
+        return $this->hospital;
+    }
+
+    public function setHospital(?Hospital $hospital): self
+    {
+        $this->hospital = $hospital;
+
+        return $this;
+    }
+
+    public function getUsuario(): ?Usuarios
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuarios $usuario): self
+    {
+        $this->usuario = $usuario;
 
         return $this;
     }
