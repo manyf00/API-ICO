@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MedicacionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,16 @@ class Medicacion
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $observaciones;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Usuarios::class, inversedBy="medicacions")
+     */
+    private $usuario;
+
+    public function __construct()
+    {
+        $this->usuario = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +132,32 @@ class Medicacion
     public function setObservaciones(?string $observaciones): self
     {
         $this->observaciones = $observaciones;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Usuarios[]
+     */
+    public function getUsuario(): Collection
+    {
+        return $this->usuario;
+    }
+
+    public function addUsuario(Usuarios $usuario): self
+    {
+        if (!$this->usuario->contains($usuario)) {
+            $this->usuario[] = $usuario;
+        }
+
+        return $this;
+    }
+
+    public function removeUsuario(Usuarios $usuario): self
+    {
+        if ($this->usuario->contains($usuario)) {
+            $this->usuario->removeElement($usuario);
+        }
 
         return $this;
     }

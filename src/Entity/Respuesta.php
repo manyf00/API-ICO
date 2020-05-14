@@ -27,6 +27,16 @@ class Respuesta
      */
     private $texto;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Pregunta::class, inversedBy="respuestas")
+     */
+    private $pregunta;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuarios::class, inversedBy="respuestas")
+     */
+    private $usuario;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +62,30 @@ class Respuesta
     public function setTexto(?string $texto): self
     {
         $this->texto = $texto;
+
+        return $this;
+    }
+
+    public function getPregunta(): ?Pregunta
+    {
+        return $this->pregunta;
+    }
+
+    public function setPregunta(?Pregunta $pregunta): self
+    {
+        $this->pregunta = $pregunta;
+
+        return $this;
+    }
+
+    public function getUsuario(): ?Usuarios
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuarios $usuario): self
+    {
+        $this->usuario = $usuario;
 
         return $this;
     }

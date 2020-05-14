@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\HospitalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,6 +58,22 @@ class Hospital
      * @ORM\Column(type="json", nullable=true)
      */
     private $ubicacion = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity=Cita::class, mappedBy="hospital")
+     */
+    private $citas;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Usuarios::class, mappedBy="hospital")
+     */
+    private $usuarios;
+
+    public function __construct()
+    {
+        $this->citas = new ArrayCollection();
+        $this->usuarios = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -154,6 +172,68 @@ class Hospital
     public function setUbicacion(?array $ubicacion): self
     {
         $this->ubicacion = $ubicacion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cita[]
+     */
+    public function getCitas(): Collection
+    {
+        return $this->citas;
+    }
+
+    public function addCita(Cita $cita): self
+    {
+        if (!$this->citas->contains($cita)) {
+            $this->citas[] = $cita;
+            $cita->setHospital($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCita(Cita $cita): self
+    {
+        if ($this->citas->contains($cita)) {
+            $this->citas->removeElement($cita);
+            // set the owning side to null (unless already changed)
+            if ($cita->getHospital() === $this) {
+                $cita->setHospital(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Usuarios[]
+     */
+    public function getUsuarios(): Collection
+    {
+        return $this->usuarios;
+    }
+
+    public function addUsuario(Usuarios $usuario): self
+    {
+        if (!$this->usuarios->contains($usuario)) {
+            $this->usuarios[] = $usuario;
+            $usuario->setHospital($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsuario(Usuarios $usuario): self
+    {
+        if ($this->usuarios->contains($usuario)) {
+            $this->usuarios->removeElement($usuario);
+            // set the owning side to null (unless already changed)
+            if ($usuario->getHospital() === $this) {
+                $usuario->setHospital(null);
+            }
+        }
 
         return $this;
     }
