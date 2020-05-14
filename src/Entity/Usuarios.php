@@ -42,11 +42,6 @@ class Usuarios
      */
     private $telefonos = [];
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Hospital::class, inversedBy="usuarios")
-     */
-    private $hospital;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -108,18 +103,6 @@ class Usuarios
     public function setTelefonos(?array $telefonos): self
     {
         $this->telefonos = $telefonos;
-
-        return $this;
-    }
-
-    public function getHospital(): ?Hospital
-    {
-        return $this->hospital;
-    }
-
-    public function setHospital(?Hospital $hospital): self
-    {
-        $this->hospital = $hospital;
 
         return $this;
     }
