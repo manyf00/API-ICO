@@ -40,7 +40,7 @@ class Usuarios
     private $correo;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
     private $telefonos = [];
 

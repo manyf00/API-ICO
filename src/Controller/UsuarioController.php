@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\UsuariosRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,16 +22,18 @@ class UsuarioController
 
     public function __construct(UsuariosRepository $usuariosRepository)
     {
-        $this->UsuariosRepository = $usuariosRepository;
+        $this->usuariosRepository = $usuariosRepository;
     }
     /**
      * @Route("user/{id}", name="get_one_user", methods={"GET"})
      */
-    public function get($id)
+    public function get($id) : JsonResponse
     {
+
         $user = $this->usuariosRepository->findOneBy(['id' => $id]);
-        
+        echo "he entrado";
         $data=[
+            'id'=>$user->getId(),
             'nombre'=>$user->getNombre(),
             'apellidos'=>$user->getApellidos(),
             'genero'=>$user->getGenero(),
@@ -40,7 +41,7 @@ class UsuarioController
             'telefonos'=>$user->getTelefonos(),
             'hospital'=>$user->getHospital()->getNombre()
         ];
-        
+        //var_dump($data);
         return new JsonResponse($data, Response::HTTP_OK);
     }
 }

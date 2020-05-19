@@ -30,12 +30,12 @@ class Hospital
     private $nombreUnidad;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
     private $telefonos = [];
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
     private $diasAbiertos = [];
 
@@ -50,7 +50,7 @@ class Hospital
     private $horaFinal;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
     private $correos = [];
 
