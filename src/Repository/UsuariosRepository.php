@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repository;
-
 use App\Entity\Usuarios;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,6 +17,11 @@ class UsuariosRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Usuarios::class);
     }
+    
+    /*public function getHospitalID ($userId)
+    {
+        return $this->getEntityManager()->createQuery('SELECT u.hospital FROM App:Usuarios u WHERE u.id = '.$userId)->getResult();
+    }*/
 
     // /**
     //  * @return Usuarios[] Returns an array of Usuarios objects

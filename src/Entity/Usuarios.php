@@ -69,6 +69,11 @@ class Usuarios
      */
     private $hospital;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dataNeixement;
+
     public function __construct()
     {
         $this->medicacions = new ArrayCollection();
@@ -271,6 +276,18 @@ class Usuarios
     public function setHospital(?Hospital $hospital): self
     {
         $this->hospital = $hospital;
+
+        return $this;
+    }
+
+    public function getDataNeixement(): ?\DateTimeInterface
+    {
+        return $this->dataNeixement;
+    }
+
+    public function setDataNeixement(?\DateTimeInterface $dataNeixement): self
+    {
+        $this->dataNeixement = $dataNeixement;
 
         return $this;
     }
