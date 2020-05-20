@@ -149,7 +149,7 @@ class UsuarioController
         empty($data['genero']) ? true : $user->setGenero($data['genero']);
         empty($data['correo']) ? true : $user->setCorreo($data['correo']);
         empty($data['telefonos']) ? true : $user->setTelefonos($data['telefonos']);
-
+        empty($data['dataNeixement']) ? true : $user->setDataNeixement(new \DateTime($data['dataNeixement']));
         $updatedUser = $this->usuariosRepository->updateUsuario($user);
 
 		return new JsonResponse(['status' => 'Usuari actualitzat!'], Response::HTTP_OK);
@@ -163,7 +163,7 @@ class UsuarioController
         $cita = $this->citaRepository->findOneBy(['id'=>$this->id]);
         $data = json_decode($request->getContent(), true);
 
-        //empty($data['fecha']) ? true : $cita->setFecha($data['fecha']);
+        empty($data['fecha']) ? true : $cita->setFecha(new \DateTime($data['fecha']));
         empty($data['edificio']) ? true : $cita->setEdificio($data['edificio']);
         empty($data['box']) ? true : $cita->setBox($data['box']);
         empty($data['indicaciones']) ? true : $cita->setIndicaciones($data['indicaciones']);
