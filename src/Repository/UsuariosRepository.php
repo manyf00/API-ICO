@@ -4,6 +4,7 @@ namespace App\Repository;
 use App\Entity\Usuarios;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @method Usuarios|null find($id, $lockMode = null, $lockVersion = null)
@@ -13,16 +14,19 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class UsuariosRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, Usuarios::class);
+        $this->manager = $manager;
     }
     
-    /*public function getHospitalID ($userId)
+    public function updateUsuario(Usuarios $user): Usuarios
     {
-        return $this->getEntityManager()->createQuery('SELECT u.hospital FROM App:Usuarios u WHERE u.id = '.$userId)->getResult();
-    }*/
+        $this->manager->persist($user);
+        $this->manager->flush();
 
+        return $user;
+    }
     // /**
     //  * @return Usuarios[] Returns an array of Usuarios objects
     //  */

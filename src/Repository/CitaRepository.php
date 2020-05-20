@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Cita;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @method Cita|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +15,18 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CitaRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, Cita::class);
+        $this->manager = $manager;
+    }
+
+    public function updateCita(Cita $cita): Cita
+    {
+        $this->manager->persist($cita);
+        $this->manager->flush();
+
+        return $cita;
     }
 
     // /**

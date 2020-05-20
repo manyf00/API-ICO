@@ -44,7 +44,7 @@ class UsuarioController
 
         $user = $this->usuariosRepository->findOneBy(['id' => $this->id]);
         $data=[
-            'id'=>$user->getId(),
+            
             'nombre'=>$user->getNombre(),
             'apellidos'=>$user->getApellidos(),
             'genero'=>$user->getGenero(),
@@ -88,14 +88,15 @@ class UsuarioController
         $data=[];
         foreach($citas as $cita){
             $data[]=[
-            'fecha'=>$cita->getFecha(),
-            'edificio'=>$cita->getEdificio(),
-            'box'=>$cita->getBox(),
-            'indicaciones'=>$cita->getIndicaciones(),
-            'estado'=>$cita->getEstado(),
-            'hospital'=>$cita->getHospital()->getNombre(),
-            'ubicacion'=>$cita->getHospital()->getUbicacion(),
-        ];
+                'id'=>$cita->getId(),
+                'fecha'=>$cita->getFecha(),
+                'edificio'=>$cita->getEdificio(),
+                'box'=>$cita->getBox(),
+                'indicaciones'=>$cita->getIndicaciones(),
+                'estado'=>$cita->getEstado(),
+                'hospital'=>$cita->getHospital()->getNombre(),
+                'ubicacion'=>$cita->getHospital()->getUbicacion(),
+            ];
     }
         return new JsonResponse($data, Response::HTTP_OK);
     }
@@ -103,30 +104,29 @@ class UsuarioController
     /**
      * @Route("medicamentos", name="medicamentos", methods={"GET"})
      */
-    public function getMedicamentos() : JsonResponse
+    /*public function getMedicamentos() : JsonResponse
     {
         $user = $this->usuariosRepository->findOneBy(['id'=>$this->id]);
         var_dump($user);
-        $medicamentos=$this->medicacionRepository->findBy(['usuario'=>$user]);
-        $data=[];
-        foreach($medicamentos as $medicamento){
+        //$medicamentos=$this->medicacionRepository->findBy(['usuario'=>$user]);
+        $data=['test'=>"hello"];
+        /*foreach($medicamentos as $medicamento){
             $data[]=[
             'id'=>$medicamento->getId(),
             'nodmbre'=>$medicamento->getNombre(),
         ];
     }
         return new JsonResponse($data, Response::HTTP_OK);
-    }
+    }*/
 
     /**
-     * @Route("medicamento/{$id}", name="medicamento", methods={"GET"})
+     * @Route("medicamento/{id}", name="medicamento", methods={"GET"})
      */
     public function getMedicamento($id) : JsonResponse
     {
-        $user = $this->usuariosRepository->findOneBy(['id'=>$this->id]);
-        $medicamento=$this->medicacionRepository->findByfindOneBy(['id'=>$id]);
+        $medicamento=$this->medicacionRepository->findOneBy(['id'=>$id]);
         $data=[
-            'nodmbre'=>$medicamento->getNombre(),
+            'nombre'=>$medicamento->getNombre(),
             'compuestoActivo'=>$medicamento->getCompuestoActivo(),
             'comprimidosTotales'=>$medicamento->getComprimidosTotales(),
             'usosDiarios'=>$medicamento->getUsosDiarios(),
@@ -135,4 +135,44 @@ class UsuarioController
         ];
         return new JsonResponse($data, Response::HTTP_OK);
     }
+
+    /**
+     * @Route("perfil", name="update_perfil", methods={"PUT"})
+     */
+    public function updatePerfil(Request $request): JsonResponse
+    {
+        $user = $this->usuariosRepository->findOneBy(['id'=>$this->id]);
+        $data = json_decode($request->getContent(), true);
+
+        empty($data['nombre']) ? true : $user->setNombre($data['nombre']);
+        empty($data['apellidos']) ? true : $user->setApellidos($data['apellidos']);
+        empty($data['genero']) ? true : $user->setGenero($data['genero']);
+        empty($data['correo']) ? true : $user->setCorreo($data['correo']);
+        empty($data['telefonos']) ? true : $user->setTelefonos($data['telefonos']);
+
+        $updatedUser = $this->usuariosRepository->updateUsuario($user);
+
+		return new JsonResponse(['status' => 'Usuari actualitzat!'], Response::HTTP_OK);
+    }
+
+    /**
+     * @Route("cita/{id}", name="update_cita", methods={"PUT"})
+     */
+    public function updateCita(Request $request): JsonResponse
+    {
+        $cita = $this->citaRepository->findOneBy(['id'=>$this->id]);
+        $data = json_decode($request->getContent(), true);
+
+        //empty($data['fecha']) ? true : $cita->setFecha($data['fecha']);
+        empty($data['edificio']) ? true : $cita->setEdificio($data['edificio']);
+        empty($data['box']) ? true : $cita->setBox($data['box']);
+        empty($data['indicaciones']) ? true : $cita->setIndicaciones($data['indicaciones']);
+        empty($data['estado']) ? true : $cita->setEstado($data['estado']);
+        //falta hospital
+
+        $updatedCita = $this->citaRepository->updateCita($cita);
+
+		return new JsonResponse(['status' => 'Usuari actualitzat!'], Response::HTTP_OK);
+    }
+
 }
