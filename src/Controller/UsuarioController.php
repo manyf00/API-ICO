@@ -84,7 +84,7 @@ class UsuarioController
     public function getCita() : JsonResponse
     {
         $user = $this->usuariosRepository->findOneBy(['id'=>$this->id]);
-        $citas=$this->citaRepository->findBy(['usuario'=>$user]);
+        $citas=$user->getCitas();
         $data=[];
         foreach($citas as $cita){
             $data[]=[
@@ -104,20 +104,19 @@ class UsuarioController
     /**
      * @Route("medicamentos", name="medicamentos", methods={"GET"})
      */
-    /*public function getMedicamentos() : JsonResponse
+    public function getMedicamentos() : JsonResponse
     {
         $user = $this->usuariosRepository->findOneBy(['id'=>$this->id]);
-        var_dump($user);
-        //$medicamentos=$this->medicacionRepository->findBy(['usuario'=>$user]);
-        $data=['test'=>"hello"];
-        /*foreach($medicamentos as $medicamento){
+        //var_dump($user);
+        $medicamentos=$user->getMedicacions();
+        foreach($medicamentos as $medicamento){
             $data[]=[
             'id'=>$medicamento->getId(),
             'nodmbre'=>$medicamento->getNombre(),
         ];
     }
         return new JsonResponse($data, Response::HTTP_OK);
-    }*/
+    }
 
     /**
      * @Route("medicamento/{id}", name="medicamento", methods={"GET"})
