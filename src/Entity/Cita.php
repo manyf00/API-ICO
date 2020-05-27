@@ -162,16 +162,4 @@ class Cita
 
         return $this;
     }
-
-    public function getHora(): ?\DateTimeInterface
-    {
-        return $this->hora;
-    }
-
-    public function setHora(?\DateTimeInterface $hora): self
-    {
-        $this->hora = $hora;
-
-        return $this;
-    }
 }
