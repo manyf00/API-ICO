@@ -88,16 +88,12 @@ class UsuarioController
         $citas=$user->getCitas();
         $data=[];
         foreach($citas as $cita){
+            
             $data[]=[
                 'id'=>$cita->getId(),
                 'nombre'=>$cita->getNombre(),
                 'fecha'=>$cita->getFecha(),
-                'edificio'=>$cita->getEdificio(),
-                'box'=>$cita->getBox(),
-                'indicaciones'=>$cita->getIndicaciones(),
-                'estado'=>$cita->getEstado(),
-                'hospital'=>$cita->getHospital()->getNombre(),
-                'ubicacion'=>$cita->getHospital()->getUbicacion(),
+                
             ];
     }
         return new JsonResponse($data, Response::HTTP_OK);
@@ -112,6 +108,13 @@ class UsuarioController
                 'id'=>$cita->getId(),
                 'nombre'=>$cita->getNombre(),
                 'fecha'=>$cita->getFecha(),
+                'hora'=>$cita->getHora(),
+                'edificio'=>$cita->getEdificio(),
+                'box'=>$cita->getBox(),
+                'indicaciones'=>$cita->getIndicaciones(),
+                'estado'=>$cita->getEstado(),
+                'hospital'=>$cita->getHospital()->getNombre(),
+                'ubicacion'=>$cita->getHospital()->getUbicacion(),
             ];
         return new JsonResponse($data, Response::HTTP_OK);
     }
