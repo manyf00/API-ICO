@@ -52,7 +52,7 @@ class UsuarioController
             'telefonos'=>$user->getTelefonos(),
             'dataNeixement'=>$user->getDataNeixement(),
         ];
-        //var_dump($data);
+        
         return new JsonResponse($data, Response::HTTP_OK);
     }
 
@@ -81,7 +81,7 @@ class UsuarioController
     /**
      * @Route("citas", name="citas", methods={"GET"})
      */
-    public function getCita() : JsonResponse
+    public function getCitas() : JsonResponse
     {
         $user = $this->usuariosRepository->findOneBy(['id'=>$this->id]);
         $citas=$user->getCitas();
@@ -89,6 +89,7 @@ class UsuarioController
         foreach($citas as $cita){
             $data[]=[
                 'id'=>$cita->getId(),
+                'nombre'=>$cita->getNombre(),
                 'fecha'=>$cita->getFecha(),
                 'edificio'=>$cita->getEdificio(),
                 'box'=>$cita->getBox(),
@@ -100,6 +101,19 @@ class UsuarioController
     }
         return new JsonResponse($data, Response::HTTP_OK);
     }
+    /**
+     * @Route("cita/{id}", name="cita", methods={"GET"})
+     */
+    public function getCita($id) : JsonResponse
+    {
+        $cita=$this->citaRepository->findOneBy(['id'=>$id]);
+            $data=[
+                'id'=>$cita->getId(),
+                'nombre'=>$cita->getNombre(),
+                'fecha'=>$cita->getFecha(),
+            ];
+        return new JsonResponse($data, Response::HTTP_OK);
+    }
 
     /**
      * @Route("medicamentos", name="medicamentos", methods={"GET"})
@@ -107,12 +121,15 @@ class UsuarioController
     public function getMedicamentos() : JsonResponse
     {
         $user = $this->usuariosRepository->findOneBy(['id'=>$this->id]);
-        //var_dump($user);
+        
         $medicamentos=$user->getMedicacions();
         foreach($medicamentos as $medicamento){
             $data[]=[
             'id'=>$medicamento->getId(),
             'nodmbre'=>$medicamento->getNombre(),
+            'usosDiarios'=>$medicamento->getUsosDiarios(),
+            'cantidad'=>$medicamento->getCantidad(),
+            'tipoDeMedicamento'=>$medicamento->getTipo(),
         ];
     }
         return new JsonResponse($data, Response::HTTP_OK);
@@ -125,11 +142,14 @@ class UsuarioController
     {
         $medicamento=$this->medicacionRepository->findOneBy(['id'=>$id]);
         $data=[
+            'id'=>$medicamento->getId(),
             'nombre'=>$medicamento->getNombre(),
             'compuestoActivo'=>$medicamento->getCompuestoActivo(),
             'comprimidosTotales'=>$medicamento->getComprimidosTotales(),
             'usosDiarios'=>$medicamento->getUsosDiarios(),
             'dosis'=>$medicamento->getDosis(),
+            'cantidad'=>$medicamento->getCantidad(),
+            'tipoDeMedicamento'=>$medicamento->getTipo(),
             'observaciones'=>$medicamento->getObservaciones(),
         ];
         return new JsonResponse($data, Response::HTTP_OK);
@@ -153,6 +173,7 @@ class UsuarioController
 
 		return new JsonResponse(['status' => 'Usuari actualitzat!'], Response::HTTP_OK);
     }
+
 
     /**
      * @Route("cita/{id}", name="update_cita", methods={"PUT"})
