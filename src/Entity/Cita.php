@@ -58,7 +58,7 @@ class Cita
     private $Nombre;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="time", nullable=true)
      */
     private $hora;
 
@@ -159,6 +159,18 @@ class Cita
     public function setNombre(?string $Nombre): self
     {
         $this->Nombre = $Nombre;
+
+        return $this;
+    }
+
+    public function getHora(): ?\DateTimeInterface
+    {
+        return $this->hora;
+    }
+
+    public function setHora(?\DateTimeInterface $hora): self
+    {
+        $this->hora = $hora;
 
         return $this;
     }
