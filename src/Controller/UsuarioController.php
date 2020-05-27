@@ -93,6 +93,7 @@ class UsuarioController
                 'id'=>$cita->getId(),
                 'nombre'=>$cita->getNombre(),
                 'fecha'=>$cita->getFecha(),
+                'hora'=>$cita->getHora(),
                 
             ];
     }
