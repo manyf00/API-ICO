@@ -51,6 +51,7 @@ class UsuarioController
             'correo'=>$user->getCorreo(),
             'telefonos'=>$user->getTelefonos(),
             'dataNeixement'=>$user->getDataNeixement(),
+            'hospital'=>$user->getHospital()->getNombre(),
         ];
         
         return new JsonResponse($data, Response::HTTP_OK);
