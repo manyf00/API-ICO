@@ -50,7 +50,7 @@ class UsuarioController
             'genero'=>$user->getGenero(),
             'correo'=>$user->getCorreo(),
             'telefonos'=>$user->getTelefonos(),
-            'dataNeixement'=>$user->getDataNeixement(),
+            'dataNaixement'=>$user->getDataNeixement(),
             'hospital'=>$user->getHospital()->getNombre(),
         ];
         
@@ -131,7 +131,7 @@ class UsuarioController
         foreach($medicamentos as $medicamento){
             $data[]=[
             'id'=>$medicamento->getId(),
-            'nodmbre'=>$medicamento->getNombre(),
+            'nombre'=>$medicamento->getNombre(),
             'usosDiarios'=>$medicamento->getUsosDiarios(),
             'cantidad'=>$medicamento->getCantidad(),
             'tipoDeMedicamento'=>$medicamento->getTipo(),
