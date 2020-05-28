@@ -69,6 +69,21 @@ class Hospital
      */
     private $usuarios;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $provincia;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $LineaBus;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lineasMetro;
+
     public function __construct()
     {
         $this->citas = new ArrayCollection();
@@ -234,6 +249,42 @@ class Hospital
                 $usuario->setHospital(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProvincia(): ?string
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia(?string $provincia): self
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    public function getLineaBus(): ?string
+    {
+        return $this->LineaBus;
+    }
+
+    public function setLineaBus(?string $LineaBus): self
+    {
+        $this->LineaBus = $LineaBus;
+
+        return $this;
+    }
+
+    public function getLineasMetro(): ?string
+    {
+        return $this->lineasMetro;
+    }
+
+    public function setLineasMetro(?string $lineasMetro): self
+    {
+        $this->lineasMetro = $lineasMetro;
 
         return $this;
     }
