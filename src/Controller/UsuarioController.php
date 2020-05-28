@@ -232,7 +232,7 @@ class UsuarioController
      */
     public function getProvinciaHospitales($provincia) : JsonResponse
     {
-        $hospitales=$this->hospitalRepository->findOneBy(['provincia'=>$provincia]);;
+        $hospitales=$this->hospitalRepository->findBy(['provincia'=>$provincia]);;
            
         foreach($hospitales as $hospital){
 
