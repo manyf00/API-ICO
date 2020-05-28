@@ -6,6 +6,8 @@ use App\Repository\UsuariosRepository;
 use App\Repository\HospitalRepository;
 use App\Repository\MedicacionRepository;
 use App\Repository\CitaRepository;
+use App\Repository\PreguntaRepository;
+use App\Repository\RespuestaRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,13 +30,16 @@ class UsuarioController
     private $hospitalRepository;
     private $citaRepository;
     private $medicacionRepository;
-
-    public function __construct(UsuariosRepository $usuariosRepository, HospitalRepository $hospitalRepository, CitaRepository $citaRepository, MedicacionRepository $medicacionRepository )
+    private $respuestaRepository;
+    private $preguntaRepository;
+    public function __construct(UsuariosRepository $usuariosRepository, HospitalRepository $hospitalRepository, CitaRepository $citaRepository, MedicacionRepository $medicacionRepository, PreguntaRepository $preguntaRepository , RespuestaRepository $respuestaRepository )
     {
         $this->usuariosRepository = $usuariosRepository;
         $this->hospitalRepository = $hospitalRepository;
         $this->citaRepository = $citaRepository;
         $this->medicacionRepository = $medicacionRepository;
+        $this->respuestaRepository = $respuestaRepository;
+        $this->preguntaRepository = $preguntaRepository;
     }
     /**
      * @Route("perfil", name="perfil", methods={"GET"})
@@ -282,5 +287,24 @@ class UsuarioController
         return new JsonResponse($data, Response::HTTP_OK);
     }
 
+    /**
+     * @Route("preguntas", name="all_preguntas", methods={"GET"})
+     */
+    public function getAllPreguntas() : JsonResponse
+    {
+        $preguntas=$this->preguntaRepository->findAll();
+           
+        foreach($preguntas as $pregunta){
+
+            $data[]=[
+                'id'=>$pregunta->getId(),
+                'nombre'=>$pregunta->getUsuario()->getNombre(),
+                'nombre'=>$pregunta->getUsuario()->getApellidos(),
+                'fecha'=>$pregunta->getFecha(),
+                'pregunta'=>$pregunta->getPregunta(),
+            ];
+        }
+        return new JsonResponse($data, Response::HTTP_OK);
+    }
 
 }
