@@ -200,4 +200,87 @@ class UsuarioController
 		return new JsonResponse(['status' => 'Usuari actualitzat!'], Response::HTTP_OK);
     }
 
+    /**
+     * @Route("hospitales", name="all_hospitales", methods={"GET"})
+     */
+    public function getAllHospitales() : JsonResponse
+    {
+        $hospitales=$this->hospitalRepository->findAll();
+           
+        foreach($hospitales as $hospital){
+
+            $data[]=[
+                'id'=>$hospital->getId(),
+                'nombre'=>$hospital->getNombre(),
+                'nombreUnidad'=>$hospital->getNombreUnidad(),
+                'telefonos'=>$hospital->getTelefonos(),
+                'diasAbiertos'=>$hospital->getDiasAbiertos(),
+                'horaInicio'=>$hospital->getHoraInicio(),
+                'horaFinal'=>$hospital->getHoraFinal(),
+                'correos'=>$hospital->getCorreos(),
+                'ubicacion'=>$hospital->getUbicacion(),
+                'provincia'=>$hospital->getProvincia(),
+                'lineaBus'=>$hospital->getLineaBus(),
+                'lineasMetro'=>$hospital->getLineasMetro(),
+            ];
+        }
+        return new JsonResponse($data, Response::HTTP_OK);
+    }
+
+    /**
+     * @Route("hospital/{provincia}", name="provincia_hospitales", methods={"GET"})
+     */
+    public function getProvinciaHospitales($provincia) : JsonResponse
+    {
+        $hospitales=$this->hospitalRepository->findOneBy(['provincia'=>$provincia]);;
+           
+        foreach($hospitales as $hospital){
+
+            $data[]=[
+                'id'=>$hospital->getId(),
+                'nombre'=>$hospital->getNombre(),
+                'nombreUnidad'=>$hospital->getNombreUnidad(),
+                'telefonos'=>$hospital->getTelefonos(),
+                'diasAbiertos'=>$hospital->getDiasAbiertos(),
+                'horaInicio'=>$hospital->getHoraInicio(),
+                'horaFinal'=>$hospital->getHoraFinal(),
+                'correos'=>$hospital->getCorreos(),
+                'ubicacion'=>$hospital->getUbicacion(),
+                'provincia'=>$hospital->getProvincia(),
+                'lineaBus'=>$hospital->getLineaBus(),
+                'lineasMetro'=>$hospital->getLineasMetro(),
+            ];
+        }
+        return new JsonResponse($data, Response::HTTP_OK);
+    }
+
+
+
+    /**
+     * @Route("hospital", name="hospitalReferencia", methods={"GET"})
+     */
+    public function getHospitalReferencia() : JsonResponse
+    {
+        
+        $user = $this->usuariosRepository->findOneBy(['id'=>$this->id]);
+        $hospital=$user->getHospital();
+
+            $data=[
+                'id'=>$hospital->getId(),
+                'nombre'=>$hospital->getNombre(),
+                'nombreUnidad'=>$hospital->getNombreUnidad(),
+                'telefonos'=>$hospital->getTelefonos(),
+                'diasAbiertos'=>$hospital->getDiasAbiertos(),
+                'horaInicio'=>$hospital->getHoraInicio(),
+                'horaFinal'=>$hospital->getHoraFinal(),
+                'correos'=>$hospital->getCorreos(),
+                'ubicacion'=>$hospital->getUbicacion(),
+                'provincia'=>$hospital->getProvincia(),
+                'lineaBus'=>$hospital->getLineaBus(),
+                'lineasMetro'=>$hospital->getLineasMetro(),
+            ];
+        return new JsonResponse($data, Response::HTTP_OK);
+    }
+
+
 }
