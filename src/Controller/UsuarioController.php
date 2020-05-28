@@ -307,4 +307,25 @@ class UsuarioController
         return new JsonResponse($data, Response::HTTP_OK);
     }
 
+    /**
+     * @Route("respuesta/{id}", name="respuesta", methods={"GET"})
+     */
+    public function getRespuesas($id) : JsonResponse
+    {
+        $pregunta=$this->preguntaRepository->findOneBy(['id'=>$id]);
+        $respuestas=$pregunta->getRespuestas();
+           
+        foreach($respuestas as $respuesta){
+
+            $data[]=[
+                'id'=>$respuesta->getId(),
+                'nombre'=>$respuesta->getUsuario()->getNombre(),
+                'nombre'=>$respuesta->getUsuario()->getApellidos(),
+                'fecha'=>$respuesta->getFecha(),
+                'respuesta'=>$respuesta->getTexto(),
+            ];
+        }
+        return new JsonResponse($data, Response::HTTP_OK);
+    }
+
 }
