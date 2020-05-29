@@ -28,7 +28,7 @@ class PreguntaRepository extends ServiceEntityRepository
         $newPregunta
             ->setUsuario($user)
             ->setPregunta($pregunta)
-            ->setFecha(new \DateTime("Y/m/d"));
+            ->setFecha(new \DateTime());
         $this->manager->persist($newPregunta);
         $this->manager->flush();
     }
