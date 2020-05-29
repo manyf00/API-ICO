@@ -299,7 +299,7 @@ class UsuarioController
             $data[]=[
                 'id'=>$pregunta->getId(),
                 'nombre'=>$pregunta->getUsuario()->getNombre(),
-                'nombre'=>$pregunta->getUsuario()->getApellidos(),
+                'apellido'=>$pregunta->getUsuario()->getApellidos(),
                 'fecha'=>$pregunta->getFecha(),
                 'pregunta'=>$pregunta->getPregunta(),
             ];
@@ -320,7 +320,7 @@ class UsuarioController
             $respuestas[]=[
                 'id'=>$respuesta->getId(),
                 'nombre'=>$respuesta->getUsuario()->getNombre(),
-                'nombre'=>$respuesta->getUsuario()->getApellidos(),
+                'apellido'=>$respuesta->getUsuario()->getApellidos(),
                 'fecha'=>$respuesta->getFecha(),
                 'respuesta'=>$respuesta->getTexto(),
             ];
@@ -328,7 +328,7 @@ class UsuarioController
             $data=[
                 'id'=>$pregunta->getId(),
                 'nombre'=>$pregunta->getUsuario()->getNombre(),
-                'nombre'=>$pregunta->getUsuario()->getApellidos(),
+                'apellido'=>$pregunta->getUsuario()->getApellidos(),
                 'fecha'=>$pregunta->getFecha(),
                 'pregunta'=>$pregunta->getPregunta(),
                 'respuesta'=>$respuestas,
