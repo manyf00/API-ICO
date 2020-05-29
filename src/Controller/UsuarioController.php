@@ -359,5 +359,19 @@ class UsuarioController
     /**
      * @Route("respuesta/{id}", name="addRespuesta", methods={"POST"})
      */
-    
+    public function addRespuesta($id,Request $request): JsonResponse
+        {
+            $pregunta=$this->preguntaRepository->findOneBy(['id'=>$id]);
+            $data = json_decode($request->getContent(), true);
+            $user = $this->usuariosRepository->findOneBy(['id'=>$this->id]);
+            $respuesta = $data['respuesta'];
+
+            if (empty($respuesta)) {
+                throw new NotFoundHttpException('Expecting mandatory parameters!');
+            }
+
+            $this->preguntaRepository->postPregunta($user,$pregunta,$respuesta);
+
+            return new JsonResponse(['status' => 'respuesta creada'], Response::HTTP_CREATED);
+        }
 }

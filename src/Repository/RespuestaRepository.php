@@ -21,18 +21,18 @@ class RespuestaRepository extends ServiceEntityRepository
         $this->manager = $manager;
     }
 
-    /*public function addRespuesta($name, $type, $photoUrls)
+    public function addRespuesta($pregunta,$user,$respuesta)
     {
         $newPet = new Respuesta();
 
         $newPet
-            ->setName($name)
-            ->setType($type)
-            ->setPhotoUrls($photoUrls);
-
+            ->setPregunta($pregunta)
+            ->setUsuario($user)
+            ->setTexto($respuesta)
+            ->setFecha(new \DateTime());
         $this->manager->persist($newPet);
         $this->manager->flush();
-    }*/
+    }
 
     // /**
     //  * @return Respuesta[] Returns an array of Respuesta objects
