@@ -21,16 +21,16 @@ class RespuestaRepository extends ServiceEntityRepository
         $this->manager = $manager;
     }
 
-    public function addRespuesta($user,$pregunta,$respuesta)
+    public function postRespuesta($user,$pregunta,$respuesta)
     {
-        $newPeregunta = new Respuesta();
+        $newRespuesta = new Respuesta();
 
-        $newPeregunta
+        $newRespuesta
             ->setPregunta($pregunta)
             ->setUsuario($user)
             ->setTexto($respuesta)
             ->setFecha(new \DateTime());
-        $this->manager->persist($newPeregunta);
+        $this->manager->persist($newRespuesta);
         $this->manager->flush();
     }
 
