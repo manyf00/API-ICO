@@ -313,18 +313,17 @@ class UsuarioController
     public function getRespuesas($id) : JsonResponse
     {
         $pregunta=$this->preguntaRepository->findOneBy(['id'=>$id]);
-        $respuestas=$pregunta->getRespuestas();
            
-        foreach($respuestas as $respuesta){
 
             $data[]=[
-                'id'=>$respuesta->getId(),
-                'nombre'=>$respuesta->getUsuario()->getNombre(),
-                'nombre'=>$respuesta->getUsuario()->getApellidos(),
-                'fecha'=>$respuesta->getFecha(),
-                'respuesta'=>$respuesta->getTexto(),
+                'id'=>$pregunta->getId(),
+                'nombre'=>$pregunta->getUsuario()->getNombre(),
+                'nombre'=>$pregunta->getUsuario()->getApellidos(),
+                'fecha'=>$pregunta->getFecha(),
+                'pregunta'=>$pregunta->getPregunta(),
+                'respuesta'=>$pregunta->getRespuestas(),
             ];
-        }
+        
         return new JsonResponse($data, Response::HTTP_OK);
     }
 

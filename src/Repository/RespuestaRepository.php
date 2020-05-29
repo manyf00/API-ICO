@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Respuesta;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @method Respuesta|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,10 +15,24 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class RespuestaRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, Respuesta::class);
+        $this->manager = $manager;
     }
+
+    /*public function addRespuesta($name, $type, $photoUrls)
+    {
+        $newPet = new Respuesta();
+
+        $newPet
+            ->setName($name)
+            ->setType($type)
+            ->setPhotoUrls($photoUrls);
+
+        $this->manager->persist($newPet);
+        $this->manager->flush();
+    }*/
 
     // /**
     //  * @return Respuesta[] Returns an array of Respuesta objects

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Pregunta;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @method Pregunta|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,11 +15,24 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PreguntaRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, Pregunta::class);
+        $this->manager = $manager;
     }
 
+    /*public function addRespuesta($idUsuario, $pregunta)
+    {
+        $newPregunta = new Pregunta();
+        
+        $newPregunta
+            ->setName($name)
+            ->setType($type)
+            ->setPhotoUrls($photoUrls);
+
+        $this->manager->persist($newPregunta);
+        $this->manager->flush();
+    }*/
     // /**
     //  * @return Pregunta[] Returns an array of Pregunta objects
     //  */
