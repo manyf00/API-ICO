@@ -370,7 +370,7 @@ class UsuarioController
                 throw new NotFoundHttpException('Expecting mandatory parameters!');
             }
 
-            $this->preguntaRepository->postRespuesta($user,$pregunta,$respuesta);
+            $this->respuestaRepository->postRespuesta($user,$pregunta,$respuesta);
 
             return new JsonResponse(['status' => 'respuesta creada'], Response::HTTP_CREATED);
         }
