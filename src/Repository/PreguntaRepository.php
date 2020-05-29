@@ -21,18 +21,17 @@ class PreguntaRepository extends ServiceEntityRepository
         $this->manager = $manager;
     }
 
-    /*public function addRespuesta($idUsuario, $pregunta)
+    public function postPregunta($user, $pregunta)
     {
         $newPregunta = new Pregunta();
         
         $newPregunta
-            ->setName($name)
-            ->setType($type)
-            ->setPhotoUrls($photoUrls);
-
+            ->setUsuario($user)
+            ->setPregunta($pregunta)
+            ->setFecha(new \DateTime("Y-m-d"));
         $this->manager->persist($newPregunta);
         $this->manager->flush();
-    }*/
+    }
     // /**
     //  * @return Pregunta[] Returns an array of Pregunta objects
     //  */
