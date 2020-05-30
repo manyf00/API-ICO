@@ -393,6 +393,9 @@ class UsuarioController
                 'provincia'=>$provincia,
             ];
         }
-        return new JsonResponse($data, Response::HTTP_OK);
+        $array= new JsonResponse($data);
+        $array = array_values(array_unique($array, SORT_REGULAR));
+
+        return new JsonResponse($array, Response::HTTP_OK);
     }
 }
