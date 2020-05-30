@@ -387,7 +387,6 @@ class UsuarioController
                 $hospital->getProvincia(),
             ];
         }
-        $provincias=array_unique($provincias);
         foreach($provincias as $provincia){
             $data[]=[
                 'provincia'=>$provincia,
