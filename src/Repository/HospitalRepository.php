@@ -19,16 +19,6 @@ class HospitalRepository extends ServiceEntityRepository
         parent::__construct($registry, Hospital::class);
     }
 
-    public function Provincias ()
-    {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT DISTINCT provincia FROM  App\Entity\Hospital'
-        );
-        return $query->getResult();
-    }
-
     // /**
     //  * @return Hospital[] Returns an array of Hospital objects
     //  */
