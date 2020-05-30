@@ -24,7 +24,7 @@ class HospitalRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT DISTINCT provincia FROM hospital'
+            'SELECT DISTINCT provincia FROM  App\Entity\Hospital'
         );
         return $query->getResult;
     }
