@@ -393,6 +393,7 @@ class UsuarioController
             ];
         }
         $array= new JsonResponse($data);
+        $array = json_decode( $data, TRUE );
         $array = array_values(array_unique($array, SORT_REGULAR));
 
         return new JsonResponse($array, Response::HTTP_OK);
