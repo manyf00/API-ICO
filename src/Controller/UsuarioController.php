@@ -379,7 +379,7 @@ class UsuarioController
      */
     public function getProvincias() : JsonResponse
     {
-        $provincias=$this->hospitalRepository->findAll();
+        $provincias=$this->hospitalRepository->Provincias();
         foreach($provincias as $provincia){
             $data[]=[
                 'provincia'=>$provincia->getProvincia(),
