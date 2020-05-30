@@ -374,4 +374,18 @@ class UsuarioController
 
             return new JsonResponse(['status' => 'respuesta creada'], Response::HTTP_CREATED);
         }
+    /**
+     * @Route("provincias", name="provincias", methods={"GET"})
+     */
+    public function getProvincias() : JsonResponse
+    {
+        $provincias=$this->hospitalRepository->findAll();
+        foreach($provincias as $provincia){
+            $data[]=[
+                'provincia'=>$provincia->getProvincia(),
+            ];
+        }
+        $resultado=array_unique($data);
+        return new JsonResponse($resultado, Response::HTTP_OK);
+    }
 }
