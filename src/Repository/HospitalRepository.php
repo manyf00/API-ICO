@@ -26,7 +26,7 @@ class HospitalRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT DISTINCT provincia FROM  App\Entity\Hospital'
         );
-        return $query->getResult;
+        return $query->getResult();
     }
 
     // /**
