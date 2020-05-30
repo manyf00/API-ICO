@@ -387,15 +387,12 @@ class UsuarioController
                 $hospital->getProvincia(),
             ];
         }
+        $provincias = array_values(array_unique($provincias, SORT_REGULAR));
         foreach($provincias as $provincia){
             $data[]=[
                 'provincia'=>$provincia,
             ];
         }
-        $array= new JsonResponse($data);
-        $array = json_decode( $array, TRUE );
-        $array = array_values(array_unique($array, SORT_REGULAR));
-
-        return new JsonResponse($array, Response::HTTP_OK);
+        return new JsonResponse($data, Response::HTTP_OK);
     }
 }
