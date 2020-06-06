@@ -1,4 +1,4 @@
-# ICOApp
+# API-ICO
 En este proyecto de GitHub es la aplicacion API Rest mediante Symfony que envia las peticiones API a la [ICOApp](https://github.com/yahyaelk98/IcoApp/).
 
 
@@ -67,6 +67,191 @@ symfony server:start
  composer require symfony/apache-pack
 ```
 * Si nuestro servidor no tiene habilitado **AllowOverride All** hay que hacerlo, si no se puede copiar el contenido y añadilo a la configuracion de Apache.
+
+## Peticiones API 👨🏽‍💻
+
+Las peticiones de la API se gestionan en *./src/Controller/UsuarioController.php* donde usa los objetos de las Entidades de la base de datos que se encuentra en *./src/Entity* y las consultas/querries de la base de datos se realizan el los archivos de *./src/Repository*
+
+Todas las peticiones que realiza el controlador UsuarioController.php usa una ruta que inicia con **/api/**
+
+### GET
+* Perfil
+```
+[servidor]/api/perfil
+``` 
+Devuelve un JSON con la siguiente estructura:
+```
+{
+    "nombre":string,
+    "apellidos":string,
+    "genero":string,
+    "correo":string,
+    "telefonos":array,
+    "dataNaixement":date,
+    "hospital":string
+}
+
+``` 
+
+* Hospital de referencia del usuario
+```
+[servidor]/api/hospital
+``` 
+Devuelve un JSON con la siguiente estructura:
+```
+{
+    "nombre":string,
+    "nombreUnidad":string,
+    "telefonos":array,
+    "diasAbiertos":array,
+    "horaInicio":time,
+    "horaFinal":time,
+    "correo":string,
+    "ubicacion":JSON,
+    "provincia":string,
+    "lineaBus":string,
+    "lineasMetro":string
+}
+
+``` 
+
+* Todas las citas del usuario
+```
+[servidor]/api/citas
+``` 
+Devuelve un JSON con la siguiente estructura:
+```
+{
+    "id":integer,
+    "nombre":string,
+    "fecha":data,
+    "hora":time   
+}
+
+``` 
+
+* Una cita detallada del usuario por id
+```
+[servidor]/api/cita/{id}
+``` 
+Devuelve un JSON con la siguiente estructura:
+```
+{
+    "id":integer,
+    "nombre":string,
+    "fecha":data,
+    "hora":time,
+    "edificio":string,
+    "box":string,
+    "indicaciones":string,
+    "estado":boolean,
+    "hospital":string,
+    "ubicacion":JSON
+}
+
+``` 
+
+* Todos los medicamentos del usuario
+```
+[servidor]/api/medicamentos
+``` 
+Devuelve un JSON con la siguiente estructura:
+```
+{
+    "id":integer,
+    "nombre":string,
+    "usosDiarios":integer,
+    "cantidad":string,
+    "tipoDeMedicamento":string
+}
+
+``` 
+
+* Un medicamento del usuario por id
+```
+[servidor]/api/medicamento/{id}
+``` 
+Devuelve un JSON con la siguiente estructura:
+```
+{
+    "id":integer,
+    "nombre":string,
+    "compuestoActivo":string,
+    "comprimidosTotales":integer,
+    "usosDiarios":integer,
+    "dosis":integer,
+    "cantidad":string,
+    "tipoDeMedicamento":string
+}
+
+``` 
+
+* Todos los hospitales
+```
+[servidor]/api/hospitales
+``` 
+Devuelve un JSON con la siguiente estructura:
+```
+{
+    "nombre":string,
+    "nombreUnidad":string,
+    "telefonos":array,
+    "diasAbiertos":array,
+    "horaInicio":time,
+    "horaFinal":time,
+    "correo":string,
+    "ubicacion":JSON,
+    "provincia":string,
+    "lineaBus":string,
+    "lineasMetro":string
+}
+
+```
+
+* Todos los hospitales de una provincia
+```
+[servidor]/api/hospitales/{provincia}
+
+``` 
+Devuelve un JSON con la siguiente estructura:
+```
+{
+    "nombre":string,
+    "nombreUnidad":string,
+    "telefonos":array,
+    "diasAbiertos":array,
+    "horaInicio":time,
+    "horaFinal":time,
+    "correo":string,
+    "ubicacion":JSON,
+    "provincia":string,
+    "lineaBus":string,
+    "lineasMetro":string
+}
+
+```
+
+
+### POST
+
+### PUT
+* Perfil
+```
+[servidor]/api/perfil
+``` 
+se puede actualizar toda la informacion o parte de ella
+```
+{
+    "nombre":string,
+    "apellidos":string,
+    "genero":string,
+    "correo":string,
+    "telefonos":array,
+    "dataNaixement":date,
+    "hospital":string
+}
+
+``` 
 
 ## La API se ha construido con 🛠️
 
