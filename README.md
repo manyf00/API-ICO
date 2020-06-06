@@ -298,8 +298,7 @@ Debe enviar un JSON con la siguiente estructura:
 {
     "respuesta":string,
 }
-
-
+```
 ### PUT
 * Perfil
 ```
