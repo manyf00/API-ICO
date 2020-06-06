@@ -49,6 +49,26 @@ git clone https://github.com/manyf00/API-ICO
 ```
 Requiere instalacion de la carpeta vendor y var
 
+En caso de clonacion debe ir al archivo que se encuentra a la raiz del repositorio **.env**, este archivo se encarga de la conexion a la base de datos.
+
+En la linea 28 encontraremos con lo siguiente:
+```
+DATABASE_URL=mysql://root:thor@127.0.0.1:3306/ICO?serverVersion=5.7
+
+```
+Donde root debemos poner el nombre de usuario de la base de datos.
+
+Donde pone thor ponemos la contraseña del usuario
+
+Donde 127.0.0.1 ponemos la IP del servidor de la base de datos (en caso de trabajar en la misma maquina mantenemos la IP local)
+
+Donde pone ICO hay que poner la base de datos donde queremos trabajar (debe ser creada antes).
+
+Una vez realizado esto entramos en la raiz del poyecto y ejecutamos el la siguiente linea de comandos paracrear las entidades i las propiedades en la base de datos
+```
+bin/console make:migration
+bin/console doctrine:migrations:migrate
+```
 ## Probando el funcionamiento ⚙️
 Para poder realizar las pruebas en nuestro local levantando un servicio de symfony o desplegarla en un servidor en un entorno de desarrollo
 ### Si se despliega en local
