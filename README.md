@@ -231,8 +231,74 @@ Devuelve un JSON con la siguiente estructura:
 
 ```
 
+* Todas las preguntas
+```
+[servidor]/api/preguntas
+``` 
+Devuelve un JSON con la siguiente estructura:
+```
+{
+    "id":integer,
+    "nombre":string,
+    "apellido":array,
+    "fecha":date,
+    "pregunta":string,
+}
 
+```
+
+* Todas las respuestas de una pregunta por id
+```
+[servidor]/api/respuestas/{id}
+``` 
+Devuelve un JSON con la siguiente estructura:
+```
+{
+    "id":integer,
+    "nombre":string,
+    "apellido":array,
+    "fecha":date,
+    "pregunta":string,
+    "respuesta":array
+}
+
+```
+
+* Todas las provincias de la base de datos
+```
+[servidor]/api/provincias
+``` 
+Devuelve un JSON con la siguiente estructura:
+```
+{
+    "provincia":string
+}
+
+```
 ### POST
+
+* Pregunta
+```
+[servidor]/api/pregunta
+``` 
+Debe enviar un JSON con la siguiente estructura:
+```
+{
+    "pregunta":string,
+}
+
+```
+
+* Respuesta a una pregunta por id
+```
+[servidor]/api/respuesta/{id}
+``` 
+Debe enviar un JSON con la siguiente estructura:
+```
+{
+    "respuesta":string,
+}
+
 
 ### PUT
 * Perfil
